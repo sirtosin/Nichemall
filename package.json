@@ -20,7 +20,7 @@
     "react-icons": "^4.2.0",
     "react-paystack": "^3.0.5",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^4.0.3",
     "styled-components": "^5.3.1"
   },
   "scripts": {
@@ -31,17 +31,5 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
