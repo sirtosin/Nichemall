@@ -1,12 +1,10 @@
-import CreditCardIcon from "@material-ui/icons/CreditCard";
-import PhoneIcon from "@material-ui/icons/Phone";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import InfoIcon from "@material-ui/icons/Info";
-import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
-import FacebookIcon from "@material-ui/icons/Facebook";
 import React from "react";
+import { FaTwitter } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaPhone } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
 
 // export const products = [
 //   {
@@ -53,22 +51,22 @@ export const sublinks = [
     links: [
       {
         label: "Facebook",
-        icon: <FacebookIcon />,
+        icon: <FaFacebookF />,
         url: "http://facebook.com/",
       },
       {
         label: "Instagram",
-        icon: <InstagramIcon />,
+        icon: <FaInstagram />,
         url: "http://instagram.com/",
       },
       {
         label: "Twitter",
-        icon: <TwitterIcon />,
+        icon: <FaTwitter />,
         url: "http://twitter.com/",
       },
       {
         label: "Whatsapp",
-        icon: <WhatsAppIcon />,
+        icon: <FaWhatsapp />,
         url: "http://whatsapp.com/",
       },
     ],
@@ -78,12 +76,12 @@ export const sublinks = [
     links: [
       {
         label: "about",
-        icon: <InfoIcon />,
+        icon: <FaInfoCircle />,
         url: "/about",
       },
       {
         label: "contacts",
-        icon: <PhoneIcon />,
+        icon: <FaPhone />,
         url: "/contact",
       },
     ],

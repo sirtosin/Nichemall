@@ -1,18 +1,8 @@
 import React from "react";
+import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import CardContent from "@mui/material/CardContent";
 import styled from "styled-components";
-import CardActions from "@mui/material/CardActions";
-import Typography from "@mui/material/Typography";
-import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import CurrencyFormat from "react-currency-format";
-import Container from "@mui/material/Container";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import { useGlobalContext } from "../context";
 
 const Products = () => {
@@ -21,122 +11,110 @@ const Products = () => {
   return (
     <div>
       <ProductBody>
-        <Container
-          fixed
-          component="div"
-          sx={{
-            position: "relative",
-            top: "40em",
-            left: "3em",
-          }}
-        >
-          <Typography
-            gutterBottom
-            variant="h2"
-            component="div"
-            sx={{
-              textAlign: "center",
-              marginBottom: "1em",
-            }}
-            className="h2"
-          >
+        <Container>
+          <h2 style={{}} className="h2">
             Devices that may interest you
-          </Typography>
+          </h2>
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              component="div"
-              sx={{
-                position: "relative",
-                left: "-3em",
-                margin: "2em",
-              }}
-              spacing={{ xs: 2, md: 4 }}
-              columns={{ xs: 4, sm: 8, md: 12 }}
-            >
+          <Box>
+            <Grid>
               {products.map((product) => {
                 const { id, name, qty, image, price } = product;
                 return (
-                  <Grid item xs={12} sm={12} md={6}>
+                  <Grid>
                     <Card
-                      sx={{ maxWidth: 345 }}
-                      key={id}
-                      component="div"
-                      sx={{
+                      style={{
+                        maxWidth: 400,
                         boxShadow: "10px 10px 20px #333",
                         margin: "2em",
                       }}
+                      key={id}
                       className="card"
                     >
-                      <CardMedia
-                        component="img"
-                        height="194"
-                        image={image}
+                      <img
+                        style={{
+                          height: "200px",
+                          width: "200px",
+                          objectFit: "cover",
+                          marginLeft: "3em",
+                        }}
+                        src={image}
                         alt={name}
                       />
                       <CardContent>
-                        <Typography
-                          gutterBottom
-                          variant="h4"
-                          component="div"
-                          sx={{
+                        <h4
+                          style={{
                             textTransform: "capitalize",
+                            opacity: ".8",
+                            fontSize: "20px",
+                            fontWeight: "bold",
+                            marginLeft: "1em",
                           }}
                           className="card-name"
                         >
                           {name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        </h4>
+                        <h4>
                           <CurrencyFormat
-                            renderText={(value) => <p>{value}</p>}
+                            renderText={(value) => (
+                              <p
+                                style={{
+                                  marginLeft: "1em",
+                                }}
+                              >
+                                {value}
+                              </p>
+                            )}
                             decimalScale={2}
                             value={price}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"N"}
                           />
-                        </Typography>
+                        </h4>
                       </CardContent>
                       <CardActions>
-                        <Button
-                          component="div"
-                          sx={{
-                            marginLeft: "1em",
+                        <button
+                          style={{
                             color: "white",
                             padding: " 1em",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                             marginBottom: "2em",
                             borderRadius: "2.3rem",
+                            border: "none",
                             background:
                               "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
                           }}
                           className="card-btn"
-                          startIcon={<AddShoppingCartIcon />}
                           onClick={() => addToCart(name, image, price, qty, id)}
                         >
+                          <img
+                            style={{ width: "20px", height: "20px" }}
+                            src="/images/add_shopping_cart_black_24dp.svg"
+                          />
+
                           <span className="cart">add to cart</span>
-                        </Button>
+                        </button>
 
                         <Link to={`/${id}`}>
-                          <Button
-                            component="div"
-                            sx={{
-                              marginLeft: "8em",
+                          <button
+                            style={{
                               marginBottom: "2em",
-
                               color: "white",
-                              padding: " 1em 4em",
+                              alignItems: "center",
+                              display: "flex",
+                              padding: " 1em 2em",
+                              border: "none",
                               borderRadius: "2.3rem",
                               background:
                                 "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
                             }}
                             className="card-btn2"
-                            startIcon={<VisibilityIcon />}
                           >
-                            Preview
-                          </Button>
+                            <FaRegEye style={{ color: "black" }} /> Preview
+                          </button>
                         </Link>
                       </CardActions>
                     </Card>
@@ -150,8 +128,81 @@ const Products = () => {
     </div>
   );
 };
+const Container = styled.div`
+  & h2 {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    opacity: 0.7;
+  }
+  @media only screen and (min-width: 1200px) {
+    & h2 {
+      position: relative;
+      top: -2em;
+      left: 1.3em;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    & h2 {
+      position: relative;
+      top: 2em;
+      left: 1.3em;
+    }
+    @media only screen and (max-width: 600px) {
+      & h2 {
+        position: relative;
+        top: 2.5em;
+        left: 2em;
+        margin-bottom: 3em;
+      }
+    }
+  }
+`;
+const Box = styled.div``;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 2px;
+  align-items: center;
+  margin-left: 5em;
+  @media only screen and (width: 1024px) {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 2px;
+    align-items: center;
+    margin-top: 3em;
+    margin-left: 1.3em;
+  }
+  @media only screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 2px;
+    align-items: center;
+    margin-top: 3em;
+    margin-left: 1.3em;
+  }
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+`;
+const Card = styled.div``;
+const CardActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  @media only screen and (max-width: 600px) {
+    margin-top: 4em;
+    margin-left: -4em;
+  }
+`;
+const CardContent = styled.div``;
 
 const ProductBody = styled.div`
+  overflow: hidden;
   @media only screen and (width: 1024px) {
     & .card-btn {
       font-size: 0.8em;
@@ -164,12 +215,31 @@ const ProductBody = styled.div`
       margin-left: 2em;
     }
   }
+  @media only screen and (min-width: 1200px) {
+    & .h2 {
+      font-size: 2.7rem;
+      text-align: center;
+      margin-left: -1em;
+      width: 100%;
+      margin-top: 5em;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    & .h2 {
+      font-size: 2.7rem;
+      text-align: center;
+      margin-left: -1em;
+      margin-top: -1em;
+      width: 100%;
+    }
+  }
   @media only screen and (max-width: 600px) {
     & .h2 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       text-align: center;
+      margin-left: -2em;
       margin-top: -2em;
-      width: 80%;
+      width: 100%;
     }
     & .card {
       height: 350px;

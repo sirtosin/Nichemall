@@ -26,7 +26,7 @@ const About = () => {
   );
 };
 
-const AboutContent = styled.div`
+const AboutContent = styled.section`
   display: flex;
   height: 500px;
   padding: 2em;
@@ -40,11 +40,12 @@ const AboutContent = styled.div`
   }
 `;
 
-const AboutBody = styled.div`
+const AboutBody = styled.section`
   @media only screen and (max-width: 600px) {
     &.right img {
       width: 400px;
       height: 300px;
+      margin-left: -3em;
     }
   }
   &.right {

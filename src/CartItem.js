@@ -1,13 +1,8 @@
 import React from "react";
+import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import CurrencyFormat from "react-currency-format";
-import Typography from "@mui/material/Typography";
-
 import styled from "styled-components";
-import Button from "@mui/material/Button";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { useGlobalContext } from "./context";
-import { fontWeight } from "@mui/system";
 const CartItem = () => {
   const { cart, remove, toggleAmount } = useGlobalContext();
   return (
@@ -18,28 +13,22 @@ const CartItem = () => {
           <CartItemBody key={_id}>
             <img src={image} alt={name} />
             <CartItemContent>
-              <Typography
-                gutterBottom
-                variant="h4"
-                component="div"
-                sx={{
+              <h4
+                style={{
                   textTransform: "capitalize",
                 }}
               >
                 {name}
-              </Typography>
+              </h4>
               <CurrencyFormat
                 renderText={(value) => (
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="div"
-                    sx={{
+                  <h6
+                    style={{
                       opacity: ".8",
                     }}
                   >
                     {value}
-                  </Typography>
+                  </h6>
                 )}
                 decimalScale={2}
                 value={price}
@@ -47,21 +36,24 @@ const CartItem = () => {
                 thousandSeparator={true}
                 prefix={"N"}
               />
-              <Button
+              <button
                 onClick={() => {
                   remove(_id, price, qty);
                 }}
-                sx={{
+                style={{
                   color: "red",
                   fontWeight: "bold",
+                  border: "none",
+                  background: "transparent",
+                  padding: " 1em",
                 }}
               >
                 remove
-              </Button>
+              </button>
               <Toggle>
-                <ArrowUpwardIcon onClick={() => toggleAmount(_id, "inc")} />
+                <FaCaretUp onClick={() => toggleAmount(_id, "inc")} />
                 {qty}
-                <ArrowDownwardIcon onClick={() => toggleAmount(_id, "dec")} />
+                <FaCaretDown onClick={() => toggleAmount(_id, "dec")} />
               </Toggle>
             </CartItemContent>
           </CartItemBody>
@@ -71,25 +63,38 @@ const CartItem = () => {
   );
 };
 
-const CartItemBody = styled.div`
+const CartItemBody = styled.section`
+  position: relative;
+  top: 5em;
   display: flex;
-  margin-top: 3em;
+  margin-bottom: 3em;
   align-items: center;
   margin-left: 4em;
   & img {
     width: 200px;
     height: 200px;
   }
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: -8em;
+  }
 `;
 
-const Toggle = styled.div`
+const Toggle = styled.section`
   position: relative;
-  top: -7em;
-  left: 30em;
+  top: -2.5em;
+  left: 13em;
   cursor: pointer;
   font-weight: bold;
   font-size: 1.2em;
+  @media only screen and (max-width: 600px) {
+    position: relative;
+    top: -5em;
+    left: 12em;
+  }
 `;
-const CartItemContent = styled.div``;
+const CartItemContent = styled.section``;
 
 export default CartItem;

@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Loading from "./Loading";
 import { useParams } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
-import Typography from "@mui/material/Typography";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import Button from "@mui/material/Button";
 import { useGlobalContext } from "../context";
 import Submenu from "../Submenu";
+
 import Sidebar from "../Sidebar";
 const Details = () => {
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
   const { addToCart } = useGlobalContext();
 
   useEffect(() => {
-    setLoading(true);
     async function getProduct() {
       try {
         const response = await fetch(
@@ -42,25 +37,19 @@ const Details = () => {
       } catch (error) {
         console.log(error);
       }
-      setLoading(false);
     }
     getProduct();
   }, [id]);
-  if (loading) {
-    return <Loading />;
-  }
+
   if (!product) {
     return (
-      <Typography
-        gutterBottom
-        variant="h2"
-        component="div"
-        sx={{
+      <h2
+        style={{
           textAlign: "center",
         }}
       >
         no product to display
-      </Typography>
+      </h2>
     );
   } else {
     const { name, qty, image, price, id, desc } = product;
@@ -71,34 +60,24 @@ const Details = () => {
         <DetailContent>
           <img src={image} alt={name} />
           <DetailBody>
-            <Typography
-              gutterBottom
-              variant="h3"
-              component="div"
-              sx={{
+            <h3
+              style={{
                 textTransform: "capitalize",
               }}
             >
               {name}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              sx={{
+            </h3>
+            <h4
+              style={{
                 textTransform: "capitalize",
                 width: "70%",
                 opacity: ".8",
               }}
             >
               {desc}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="body2"
-              color="text.secondary"
-              component="div"
-              sx={{
+            </h4>
+            <p
+              style={{
                 textTransform: "capitalize",
                 opacity: ".8",
               }}
@@ -111,24 +90,28 @@ const Details = () => {
                 thousandSeparator={true}
                 prefix={"N"}
               />
-            </Typography>
+            </p>
 
-            <Button
-              component="div"
-              sx={{
+            <button
+              style={{
                 marginLeft: "3em",
                 color: "white",
+                display: "flex",
                 padding: " 1em 4em",
                 marginBottom: "2em",
                 borderRadius: "2.3rem",
                 background:
                   "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
               }}
-              startIcon={<AddShoppingCartIcon />}
               onClick={() => addToCart(name, image, price, qty, id)}
             >
+              {" "}
+              <img
+                style={{ width: "30px", height: "30px" }}
+                src="images/add_shopping_cart_black_24dp.svg"
+              />
               add to cart
-            </Button>
+            </button>
           </DetailBody>
         </DetailContent>
       </div>
@@ -136,17 +119,47 @@ const Details = () => {
   }
 };
 
-const DetailContent = styled.div`
+const DetailContent = styled.section`
   display: flex;
-  margin-top: 3em;
+  position: relative;
+  top: 7em;
   align-items: center;
   margin-left: 4em;
   & img {
     width: 400px;
     height: 400px;
   }
+  @media (max-width: 768px) {
+    position: relative;
+    top: 2em;
+  }
+  @media (max-width: 600px) {
+    position: relative;
+    top: 1em;
+
+    & img {
+      width: 300px;
+      height: 300px;
+      margin-left: -14em;
+    }
+    display: flex;
+    flex-direction: column;
+    margin-top: 3em;
+    align-items: center;
+    margin-left: 4em;
+  }
 `;
 
-const DetailBody = styled.div``;
+const DetailBody = styled.section`
+  @media (max-width: 600px) {
+    button {
+      position: relative;
+      left: -3em;
+    }
+    & img {
+      margin-left: 0em;
+    }
+  }
+`;
 
 export default Details;

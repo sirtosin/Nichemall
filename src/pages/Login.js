@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LoginIcon from "@mui/icons-material/Login";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import { useHistory } from "react-router-dom";
 import { auth } from "../firebase";
 import Submenu from "../Submenu";
@@ -46,77 +41,48 @@ const Login = () => {
       <Sidebar />
       <Box>
         <SignUp>
-          <Card
-            component="div"
-            sx={{
-              boxShadow: "10px 10px 20px #333",
-              textAlign: "center",
-              width: "500px",
-              position: "relative",
-              top: "2em",
-              height: "80vh",
-              margin: "auto",
-            }}
-          >
-            <Typography
-              gutterBottom
-              variant="h2"
-              component="div"
-              sx={{
+          <Card>
+            <h2
+              style={{
                 textAlign: "center",
               }}
             >
               Sign-in
-            </Typography>
+            </h2>
 
             <form>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{ opacity: ".8" }}
-              >
-                email
-              </Typography>
+              <h5 style={{ opacity: ".8" }}>email</h5>
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <Typography
-                gutterBottom
-                variant="h6"
-                component="div"
-                sx={{ opacity: ".8" }}
-              >
-                password
-              </Typography>
+              <h6 style={{ opacity: ".8" }}>password</h6>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button
+              <button
                 onClick={signIn}
-                component="div"
-                sx={{
-                  marginTop: "1em",
+                style={{
+                  margin: "6px auto",
                   color: "white",
+                  display: "flex",
+                  alignContent: "center",
+                  justifyContent: "center",
                   padding: " 1em 4em",
                   borderRadius: "2.3rem",
                   background:
                     "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
                 }}
-                startIcon={<LoginIcon />}
               >
+                <img src="images/login_black_24dp.svg" />
                 Sign In
-              </Button>
+              </button>
             </form>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              sx={{
+            <h6
+              style={{
                 opacity: ".8",
                 padding: "2em",
                 fontSize: ".8em",
@@ -125,11 +91,10 @@ const Login = () => {
               By signing-in you agree to the NicheMall Conditions of Use & Sale.
               Please see our Privacy Notice, our Cookies Notice and our
               Interest-Based Ads Notice.
-            </Typography>
-            <Button
+            </h6>
+            <button
               onClick={register}
-              component="div"
-              sx={{
+              style={{
                 marginBottom: "2em",
 
                 color: "white",
@@ -140,13 +105,19 @@ const Login = () => {
               }}
             >
               Create your Account
-            </Button>
+            </button>
           </Card>
         </SignUp>
       </Box>
     </div>
   );
 };
+
+const Box = styled.section`
+  width: 100%;
+  height: 700px;
+  margin: auto;
+`;
 
 const SignUp = styled.div`
   & form input {
@@ -156,6 +127,38 @@ const SignUp = styled.div`
     border-bottom: 1px solid #333;
     outline: none;
     font-size: 1em;
+  }
+  @media only screen and (max-width: 600px) {
+    & form input {
+      padding: 1em;
+      border: none;
+      width: 80%;
+      border-bottom: 1px solid #333;
+      outline: none;
+      font-size: 0.8em;
+    }
+  }
+`;
+
+const Card = styled.section`
+  box-shadow: 10px 10px 20px #333;
+  text-align: center;
+  width: 500px;
+  position: relative;
+  top: 10em;
+  height: 400px;
+  margin: auto;
+  @media only screen and (max-width: 768px) {
+    width: 70%;
+    height: 400px;
+    position: relative;
+    top: 3em;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 70%;
+    height: 400px;
+    position: relative;
+    top: 3em;
   }
 `;
 export default Login;

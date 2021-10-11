@@ -9,7 +9,6 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Checkout from "./pages/Checkout";
-import Error from "./pages/Error";
 
 function App() {
   return (
@@ -38,9 +37,6 @@ function App() {
           </Route>
           <Route path="/:id">
             <Details />
-          </Route>
-          <Route path="*">
-            <Error />
           </Route>
         </Switch>
       </Router>

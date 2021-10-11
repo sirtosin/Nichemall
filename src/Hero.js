@@ -7,27 +7,22 @@ const Hero = () => {
   const { closeSubmenu } = useGlobalContext();
   return (
     <div>
-      <HeroContainer
-        className="hero"
-        onMouseOver={closeSubmenu}
-      ></HeroContainer>
+      <HeroContainer className="hero" onMouseOver={closeSubmenu}>
+        <img
+          style={{
+            width: "100%",
+            maxHeight: "500px",
+          }}
+          src={img}
+        />
+      </HeroContainer>
     </div>
   );
 };
 
-const HeroContainer = styled.div`
-  &.hero {
-    position: absolute;
-    top: 0;
-    background-image: url(${img});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    z-index: -3;
-  }
-
+const HeroContainer = styled.section`
+  width: 100%;
+  overflow: hidden;
   @media only screen and (min-width: 992px) {
   }
 

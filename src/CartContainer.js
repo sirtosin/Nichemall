@@ -3,9 +3,7 @@ import CurrencyFormat from "react-currency-format";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "./context";
-import Typography from "@mui/material/Typography";
-import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
-import Button from "@mui/material/Button";
+import styled from "styled-components";
 
 const CartContainer = () => {
   const { cart, user, total, clearCart } = useGlobalContext();
@@ -13,104 +11,148 @@ const CartContainer = () => {
     console.log(cart);
     return (
       <header>
-        <Typography
-          gutterBottom
-          variant="h3"
-          component="div"
-          sx={{
+        <h3
+          style={{
             textAlign: "center",
           }}
         >
           Cart item
-        </Typography>
-        <Typography
-          gutterBottom
-          variant="h3"
-          component="div"
-          sx={{
+        </h3>
+        <h3
+          style={{
             textAlign: "center",
           }}
         >
           is currently empty
-        </Typography>
+        </h3>
       </header>
     );
   }
   return (
-    <div>
-      <Typography
-        gutterBottom
-        variant="h2"
-        component="div"
-        sx={{
-          textAlign: "center",
-          marginBottom: "1em",
-          textTransform: "capitalize",
-        }}
-      >
-        your items
-      </Typography>
-      <CartItem />;
-      <CurrencyFormat
-        renderText={(value) => (
-          <Typography
-            gutterBottom
-            variant="h4"
-            component="div"
-            sx={{
-              textAlign: "center",
-              textTransform: "capitalize",
-            }}
-          >
-            total: {value}
-          </Typography>
-        )}
-        decimalScale={2}
-        value={total}
-        displayType={"text"}
-        thousandSeparator={true}
-        prefix={"N"}
-      />
-      <footer>
+    <Container>
+      <h2 style={{}}>your items</h2>
+      <CartFooter>
+        <CartItem />;
+        <CurrencyFormat
+          renderText={(value) => (
+            <h4
+              style={{
+                textAlign: "center",
+                textTransform: "capitalize",
+              }}
+            >
+              total: {value}
+            </h4>
+          )}
+          decimalScale={2}
+          value={total}
+          displayType={"text"}
+          thousandSeparator={true}
+          prefix={"N"}
+        />
         <hr />
-        <Button
-          component="div"
-          sx={{
-            marginLeft: "30em",
-            marginBottom: "2em",
-            marginTop: "2em",
-            color: "white",
-            padding: " 1em 4em",
-            borderRadius: "2.3rem",
-            background:
-              "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
-          }}
-          startIcon={<CleaningServicesIcon />}
-          onClick={clearCart}
-        >
-          clear cart
-        </Button>
-        <Link to={user ? "/checkout" : "/cart"}>
-          <Button
-            component="div"
-            sx={{
-              marginLeft: "10em",
-              marginTop: "2em",
+        <footer>
+          <button
+            style={{
+              marginLeft: "30em",
               marginBottom: "2em",
-
+              marginTop: "2em",
               color: "white",
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
               padding: " 1em 4em",
               borderRadius: "2.3rem",
               background:
                 "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
             }}
+            onClick={clearCart}
           >
-            {user ? "checkout" : "sign in to checkout"}
-          </Button>
-        </Link>
-      </footer>
-    </div>
+            {" "}
+            <img src="images/cleaning_services_black_24dp.svg" />
+            clear cart
+          </button>
+          <Link to={user ? "/checkout" : "/cart"}>
+            <button
+              style={{
+                marginLeft: "10em",
+                marginTop: "2em",
+                marginBottom: "2em",
+
+                color: "white",
+                padding: " 1em 4em",
+                borderRadius: "2.3rem",
+                background:
+                  "linear-gradient(to right, rgb(120, 119, 221), rgb(221, 119, 204))",
+              }}
+              className="checkout"
+            >
+              {user ? "checkout" : "sign in to checkout"}
+            </button>
+          </Link>
+        </footer>
+      </CartFooter>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  overflow: hidden;
+  h2 {
+    position: relative;
+    top: 3em;
+    text-align: center;
+    margin-bottom: 1em;
+    text-transform: capitalize;
+  }
+  @media only screen and (max-width: 768px) {
+    h2 {
+      position: relative;
+      top: 1em;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    h2 {
+      position: relative;
+      top: 1em;
+    }
+  }
+`;
+
+const CartFooter = styled.section`
+  overflow: hidden;
+  @media only screen and (min-width: 768px) {
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      left: -13em;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      left: -13em;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      & button.checkout {
+        position: relative;
+        left: 10em;
+        top: -2em;
+      }
+    }
+  }
+`;
 
 export default CartContainer;

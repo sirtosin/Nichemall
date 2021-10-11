@@ -1,10 +1,6 @@
 import React from "react";
-import PhoneIcon from "@material-ui/icons/Phone";
-import Typography from "@mui/material/Typography";
 import Submenu from "../Submenu";
 import Sidebar from "../Sidebar";
-import MailIcon from "@material-ui/icons/Mail";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
 import styled from "styled-components";
 import emailjs from "emailjs-com";
 const Contact = () => {
@@ -22,71 +18,43 @@ const Contact = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div>
+    <Container>
       <Submenu />
       <Sidebar />
 
-      <Typography
-        gutterBottom
-        variant="h3"
-        component="div"
-        sx={{
-          color: "rgb(33, 38, 107)",
-          textTransform: "capitalize",
-          textAlign: "center",
-        }}
-      >
-        Contact Us
-      </Typography>
-      <Typography
-        gutterBottom
-        variant="h6"
-        component="div"
-        sx={{
-          color: "rgb(140, 142, 160)",
-          textTransform: "capitalize",
-          textAlign: "center",
-        }}
-      >
+      <h3 style={{}}>Contact Us</h3>
+      <h6 style={{}}>
         Feel free to make any enquires about any device on our page
-      </Typography>
+      </h6>
       <ContactContent>
         <ContactBodyLeft className="left">
           <div>
-            <Typography
-              gutterBottom
-              variant="h4"
-              component="div"
-              sx={{
+            <h4
+              style={{
                 textTransform: "capitalize",
               }}
             >
               Contact Information
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="small"
-              component="div"
-              sx={{ opacity: ".6" }}
-            >
+            </h4>
+            <p style={{ opacity: ".6" }}>
               Fill the form and a representative will get back to you within 24
               hours.
-            </Typography>
+            </p>
             <phone>
-              <PhoneIcon />
+              <img src="images/phone_black_24dp.svg" />
               <br />
               <code>+234 814 068 0757</code> <br />
               <code>+234 809 965 2296</code>
             </phone>
             <br />
             <mail>
-              <MailIcon />
+              <img src="images/email_black_24dp.svg" />
               <br />
               sirtosin45@gmail.com
             </mail>
             <br />
             <loaction>
-              <LocationOnIcon />
+              <img src="images/location_on_black_24dp.svg" />
               <br />
               8, kehinde akamo off micheal adekoya ilupeju, lagos.
             </loaction>
@@ -148,15 +116,49 @@ const Contact = () => {
           </form>
         </ContactBodyRight>
       </ContactContent>
-    </div>
+    </Container>
   );
 };
 
-const ContactContent = styled.div`
+const Container = styled.div`
+  height: 800px;
+  width: 100%;
+  h3 {
+    position: relative;
+    top: 1.4em;
+    z-index: -2;
+    font-size: 5em;
+    color: rgb(33, 38, 107);
+    text-transform: capitalize;
+    text-align: center;
+  }
+  h6 {
+    color: rgb(140, 142, 160);
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 0.8em;
+    position: relative;
+    top: 8.4em;
+  }
+  @media (max-width: 768px) {
+    h3 {
+      top: 0.4em;
+      font-size: 3em;
+    }
+    h6 {
+      top: 0.4em;
+    }
+  }
+`;
+
+const ContactContent = styled.section`
   display: flex;
-  margin: 3em 5em;
+  margin: 3em;
   background: #fff;
+  position: relative;
+  top: 7em;
   border-radius: 1.5rem;
+  max-width: 1200px;
   height: 500px;
   box-shadow: 10px 20px 40px black;
 
@@ -164,15 +166,29 @@ const ContactContent = styled.div`
     display: flex;
     height: 850px;
     flex-direction: column;
+    margin: auto;
+    width: 80%;
   }
   @media only screen and (max-width: 768px) {
     display: flex;
     height: 850px;
+    margin: auto;
+    width: 80%;
+    position: relative;
+    top: 1.7em;
     flex-direction: column;
   }
 `;
 
-const ContactBodyRight = styled.div`
+const ContactBodyRight = styled.section`
+  width: 100%;
+  @media only screen and (max-width: 600px) {
+    &.right {
+      margin-left: -6em;
+      width: 100%;
+      margin-bottom: -3em;
+    }
+  }
   &.right {
     height: inherit;
     width: auto;
@@ -190,10 +206,11 @@ const ContactBodyRight = styled.div`
   textarea {
     padding: 1em;
     border: none;
-    width: 90%;
+    width: 220px;
     border-bottom: 1px solid #333;
     outline: none;
     font-size: 1em;
+    resize: none;
   }
 
   & label {
@@ -201,7 +218,12 @@ const ContactBodyRight = styled.div`
   }
 `;
 
-const ContactBodyLeft = styled.div`
+const ContactBodyLeft = styled.section`
+  width: 100%;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    padding: 1.3em;
+  }
   &.left {
     background-color: rgb(130, 69, 228);
     border-radius: 1.3rem;

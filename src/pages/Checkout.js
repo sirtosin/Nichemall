@@ -1,12 +1,10 @@
 import React from "react";
+import { FaHome } from "react-icons/fa";
 import CurrencyFormat from "react-currency-format";
 import Submenu from "../Submenu";
 import Sidebar from "../Sidebar";
 import { Link, useHistory } from "react-router-dom";
-import Button from "@mui/material/Button";
 import styled from "styled-components";
-import HomeIcon from "@mui/icons-material/Home";
-import Typography from "@mui/material/Typography";
 import { PaystackButton } from "react-paystack";
 import { useGlobalContext } from "../context";
 
@@ -53,54 +51,41 @@ const Checkout = () => {
     );
   }
   return (
-    <div>
+    <Container>
       <Submenu />
       <Sidebar />
-      <Typography
-        gutterBottom
-        variant="body1"
-        color="text.secondary"
-        sx={{
+      <h4
+        style={{
           textTransform: "capitalize",
           margin: "2em",
         }}
       >
         hello, {user.email}
-      </Typography>
+      </h4>
       {cart.map((item) => {
         const { _id, qty, name, image, price } = item;
         return (
           <CheckoutContent key={_id}>
             <img src={image} alt={name} />
             <CheckoutBody>
-              <Typography
-                gutterBottom
-                variant="h4"
-                component="div"
-                sx={{
+              <h4
+                style={{
                   textTransform: "capitalize",
                   opacity: ".8",
                 }}
               >
                 {name}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                sx={{
+              </h4>
+              <h5
+                style={{
                   textTransform: "capitalize",
                   opacity: ".8",
                 }}
               >
                 Quantity: {qty}
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="body2"
-                color="text.secondary"
-                component="div"
-                sx={{
+              </h5>
+              <small
+                style={{
                   textTransform: "capitalize",
                 }}
               >
@@ -112,55 +97,42 @@ const Checkout = () => {
                   thousandSeparator={true}
                   prefix={"N"}
                 />
-              </Typography>
+              </small>
             </CheckoutBody>
           </CheckoutContent>
         );
       })}
-      <Typography
-        gutterBottom
-        variant="h6"
-        component="div"
-        sx={{
-          textTransform: "capitalize",
-          color: "black",
-          fontWeight: "bold",
-          marginLeft: "23em",
-        }}
-      >
-        <CurrencyFormat
-          renderText={(value) => <p>total: {value}</p>}
-          decimalScale={2}
-          value={total}
-          displayType={"text"}
-          thousandSeparator={true}
-          prefix={"N"}
-        />
-      </Typography>
-      <Link to="/">
-        <Button
-          sx={{
+      <footer>
+        <h4
+          style={{
             textTransform: "capitalize",
-            color: "orange",
-            padding: " 1em 4em",
-            marginBottom: "2em",
-            borderRadius: "2.3rem",
-            marginLeft: "22em",
+            color: "black",
             fontWeight: "bold",
+            marginLeft: "23em",
           }}
-          startIcon={<HomeIcon />}
         >
-          Back home
-        </Button>
-      </Link>
-      <PayButton>
+          <CurrencyFormat
+            renderText={(value) => <p>total: {value}</p>}
+            decimalScale={2}
+            value={total}
+            displayType={"text"}
+            thousandSeparator={true}
+            prefix={"N"}
+          />
+        </h4>
+        <Link to="/">
+          <button style={{}} className="back">
+            <FaHome />
+            Back home
+          </button>
+        </Link>
         <PaystackButton className="paystack" {...componentProps} />
-      </PayButton>
-    </div>
+      </footer>
+    </Container>
   );
 };
 
-const CheckoutContent = styled.div`
+const CheckoutContent = styled.section`
   display: flex;
   padding: 1em;
   margin: 1em;
@@ -168,29 +140,82 @@ const CheckoutContent = styled.div`
     width: 300px;
     height: 300px;
   }
-`;
-
-const PayButton = styled.div`
-  position: relative;
-
-  & .paystack {
-    position: relative;
-    left: 55em;
-    top: -7em;
-    z-index: -2;
-    cursor: pointer;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 0.1rem;
-    padding: 1em 4em;
-    border-radius: 2.3rem;
-    text-transform: uppercase;
-    background: rgb(221, 119, 204);
-    font-weight: bold;
-    color: #fff;
-    border: none;
-    border-radius: 1.3em;
+  @media (max-width: 768px) {
+    & img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  @media (max-width: 600px) {
+    & img {
+      width: 100px;
+      height: 100px;
+    }
   }
 `;
-const CheckoutBody = styled.div``;
+
+const Container = styled.section`
+  overflow: hidden;
+  margin: 0em;
+  position: relative;
+  top: 5em;
+  & .paystack {
+    border: none;
+    padding: 1em 2em;
+    border-radius: 2.3rem;
+    cursor: pointer;
+    background-color: rgba(67, 67, 252, 0.767);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  & footer button.back {
+    text-transform: capitalize;
+    color: orange;
+    background: #333;
+    border: none;
+    padding: 1em 2em;
+    margin-bottom: 2em;
+    border-radius: 2.3rem;
+    margin-left: 2em;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    position: relative;
+    top: 1em;
+    & footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    & footer button.back {
+      margin-left: -22em;
+    }
+    & .paystack {
+      position: relative;
+      top: -5em;
+    }
+  }
+  @media (max-width: 600px) {
+    position: relative;
+    top: 1em;
+    & footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    & footer button.back {
+      margin-left: -15em;
+    }
+    & .paystack {
+      position: relative;
+      left: 5em;
+    }
+  }
+`;
+const CheckoutBody = styled.section``;
 export default Checkout;
